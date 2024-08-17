@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
@@ -6,13 +7,12 @@ using WebApi.Entities;
 
 namespace WebApi.Controllers;
 
-[ApiController]//decorator for this controller
-[Route("api/[controller]")] //api/users
-public class UsersController(DataContext context) : ControllerBase
+public class UsersController(DataContext context) : BaseApiController
 {
     //private readonly DataContext _context = context;//aici am injectat cu atributul de DataContext
     //locatia unde se face cererea de la client de lista de useri, 
 
+    [AllowAnonymous]
     [HttpGet] // /api/users
     public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
     {
@@ -21,6 +21,7 @@ public class UsersController(DataContext context) : ControllerBase
         return users;
     }
 
+    [Authorize]
     [HttpGet("{id:int}")] // /api/users/3
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {

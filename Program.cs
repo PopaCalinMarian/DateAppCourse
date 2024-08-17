@@ -1,24 +1,21 @@
-using Microsoft.EntityFrameworkCore;
-using WebApi.Data;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddDbContext<DataContext> (opt =>
-   {
-     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-   }//selectin the option to use Sqlite
-
-);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices(builder.Configuration);//bcs this is an extensions, we do not need the param for the services bcs it extends it
+builder.Services.AddIdentityServices(builder.Configuration);
+//adding the auth middleware to validate the token we just created for each user
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200","https://localhost:4200"));
+//allow app to use cors on both http/s
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
