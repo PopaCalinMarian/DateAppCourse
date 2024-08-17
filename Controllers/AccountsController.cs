@@ -10,9 +10,9 @@ using WebApi.Interfaces;
 
 namespace WebApi.Controllers;
 
-public class AccountController(DataContext context, ITokenService tokenService) : BaseApiController
+public class AccountsController(DataContext context, ITokenService tokenService) : BaseApiController
 {
-    [HttpPost("register")] //account/register
+    [HttpPost("register")] //accounts/register
 
     public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerdto)
     {
