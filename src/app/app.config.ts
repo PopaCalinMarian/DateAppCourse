@@ -4,6 +4,7 @@ import {provideAnimations} from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
+import { provideToastr } from 'ngx-toastr';
 //import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
@@ -12,6 +13,11 @@ export const appConfig: ApplicationConfig = {
     //provideRouter(routes),
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    provideAnimations()
+    provideAnimations(),
+    provideToastr(
+      {
+        positionClass: 'toast-bottom-right'
+      }
+    )
   ]
 };
