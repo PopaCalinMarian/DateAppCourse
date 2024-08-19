@@ -19,7 +19,8 @@ public class AccountsController(DataContext context, ITokenService tokenService)
         if(await UserExists(registerdto.UserName)) 
         return BadRequest("Username is taken");
 
-        using var hmac = new HMACSHA512();
+        return Ok();
+        /*using var hmac = new HMACSHA512();
 
         var user = new AppUser{
             UserName = registerdto.UserName.ToLower(),
@@ -33,7 +34,7 @@ public class AccountsController(DataContext context, ITokenService tokenService)
         {
             UserName = user.UserName,
             Token = tokenService.CreateToken(user)
-        };
+        };*/
     }
 
     [HttpPost("login")]

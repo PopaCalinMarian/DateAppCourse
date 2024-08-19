@@ -24,7 +24,8 @@ public static class ApplicationServiceExtensions
         //services.AddSwaggerGen();
 
         services.AddScoped<ITokenService, TokenService>();//adding the token service
-
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         return services;
     }
 }
