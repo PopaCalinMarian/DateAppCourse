@@ -1,0 +1,15 @@
+.img-thumbnail {
+    margin: 25px;
+    width: 85%;
+    height: 85%;
+}
+
+.card-body {
+    padding: 0 25px;
+}/* first param for the padding atr is for left and right and the second is for the top and bot */
+
+.card-footer {
+    padding: 10px 15px;
+    background-color: whitesmoke;
+    border-top: none;
+}
